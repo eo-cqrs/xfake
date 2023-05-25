@@ -21,6 +21,8 @@ Project architect: [@h1alexbel](https://github.com/h1alexbel)
 
 XML In-Memory Storage for your Fake Objects.
 
+Read about [_Fake Objects pattern_](https://www.yegor256.com/2014/09/23/built-in-fake-objects.html) and Watch [_Why Mocking Frameworks are Evil_](https://www.youtube.com/watch?v=1bAixLaOCSA) by [@yegor256](https://github.com/yegor256).
+
 **Motivation**. To create a fake objects, we need to introduce some place where data will be stored.
 <br>
 We're not happy with creating this one again and again.
