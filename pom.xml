@@ -31,7 +31,7 @@ SOFTWARE.
   </parent>
   <groupId>io.github.eo-cqrs</groupId>
   <artifactId>xfake</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>xfake</name>
   <description>
     XML In-Memory Storage for your Fake Objects
