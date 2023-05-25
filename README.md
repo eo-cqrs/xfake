@@ -47,7 +47,7 @@ dependencies {
 }
 ```
 
-### Constructing `FkStorage`
+### Constructing Storage
 To create an in-memory storage, we need to provide the name of the file to create and root XML node.  
 ```java
 final FkStorage storage = new InFile("fake-test", "<fake/>");
@@ -60,7 +60,7 @@ The output of `storage.xml()` will be:
 <fake/>
 ```
 
-### Applying Directives to the Storage
+### Applying Directives
 ```java
 final FkStorage storage = new InFile("fake-test", "<fake/>");
     storage.apply(
