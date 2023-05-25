@@ -37,7 +37,6 @@ SOFTWARE.
     XML In-Memory Storage for your Fake Objects
   </description>
   <inceptionYear>2023</inceptionYear>
-  <url>https://eo-cqrs.github.io/xfake/</url>
   <developers>
     <developer>
       <id>1</id>
@@ -181,17 +180,6 @@ SOFTWARE.
             <configuration>
               <verificationFile>src/verifier/verifications.xml</verificationFile>
             </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <version>${maven-invoker-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>default</id>
-            <phase>none</phase>
           </execution>
         </executions>
       </plugin>
