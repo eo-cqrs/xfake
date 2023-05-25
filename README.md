@@ -63,11 +63,11 @@ The output of `storage.xml()` will be:
 ### Applying Directives
 ```java
 final FkStorage storage = new InFile("fake-test", "<fake/>");
-    storage.apply(
-      new Directives()
-        .xpath("/fake")
-        .addIf("servers")
-    );
+storage.apply(
+  new Directives()
+  .xpath("/fake")
+  .addIf("servers")
+);
 ```
 
 The result of the applying will be:
