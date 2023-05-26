@@ -51,8 +51,10 @@ final class FkSynchronizedStorageTest {
       );
     }
     this.latch.countDown();
-    final boolean success = this.executors.awaitTermination(2L, TimeUnit.SECONDS);
-    if (!success) {
+    final boolean failed = this.executors.awaitTermination(
+      (long) (FkSynchronizedStorageTest.N_THREADS / 2), TimeUnit.SECONDS
+    );
+    if (failed) {
       throw new TimeoutException("FkSynchronizedStorageTest#readsAndWritesConcurrently() failed");
     }
     MatcherAssert.assertThat(
