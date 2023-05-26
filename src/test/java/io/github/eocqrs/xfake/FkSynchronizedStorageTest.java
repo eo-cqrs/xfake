@@ -5,6 +5,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 
 import org.hamcrest.MatcherAssert;
@@ -20,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @since 0.0.2
  * @author l3r8yJ
  */
-class FkSynchronizedStorageTest {
+final class FkSynchronizedStorageTest {
 
   private static final int N_THREADS = Runtime.getRuntime().availableProcessors();
 
@@ -50,7 +51,10 @@ class FkSynchronizedStorageTest {
       );
     }
     this.latch.countDown();
-    this.executors.awaitTermination(2L, TimeUnit.SECONDS);
+    final boolean success = this.executors.awaitTermination(2L, TimeUnit.SECONDS);
+    if (!success) {
+      throw new TimeoutException("FkSynchronizedStorageTest#readsAndWritesConcurrently() failed");
+    }
     MatcherAssert.assertThat(
       "Has size equal to stack size",
       storage.xml().nodes("/stack/item"),
