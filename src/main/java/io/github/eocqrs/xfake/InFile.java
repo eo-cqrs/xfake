@@ -33,10 +33,6 @@ import org.xembly.Xembler;
 
 import com.jcabi.xml.XML;
 import com.jcabi.xml.XMLDocument;
-/*
- * @todo #22:45m/DEV Test Thread safety
- * We need to introduce tests for Thread safety
- */
 
 /**
  * Storage in file.
