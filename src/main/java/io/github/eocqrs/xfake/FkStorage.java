@@ -22,8 +22,9 @@
 
 package io.github.eocqrs.xfake;
 
-import com.jcabi.xml.XML;
 import org.xembly.Directive;
+
+import com.jcabi.xml.XML;
 
 /**
  * Fake Storage.
