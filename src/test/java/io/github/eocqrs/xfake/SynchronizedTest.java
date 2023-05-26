@@ -14,12 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.xembly.Directives;
 
 /**
- * Test case for {@link FkSynchronizedStorage}.
+ * Test case for {@link Synchronized}.
  *
  * @since 0.0.2
  * @author l3r8yJ
  */
-final class FkSynchronizedStorageTest {
+final class SynchronizedTest {
 
   private static final int N_THREADS = Runtime.getRuntime().availableProcessors();
 
@@ -30,11 +30,11 @@ final class FkSynchronizedStorageTest {
   @Test
   void readsAndWritesConcurrently() throws Exception {
     final Stack<Integer> values = new Stack<>();
-    IntStream.range(0, FkSynchronizedStorageTest.N_THREADS).forEach(values::push);
-    final FkStorage storage = new FkSynchronizedStorage(
+    IntStream.range(0, SynchronizedTest.N_THREADS).forEach(values::push);
+    final FkStorage storage = new Synchronized(
       new InFile("fake", "<stack/>")
     );
-    for (int idx = 0; idx < FkSynchronizedStorageTest.N_THREADS; idx++) {
+    for (int idx = 0; idx < SynchronizedTest.N_THREADS; idx++) {
       this.executors.submit(
         () -> {
           this.latch.await();
@@ -50,7 +50,7 @@ final class FkSynchronizedStorageTest {
     }
     this.latch.countDown();
     final boolean failed = this.executors.awaitTermination(
-      (long) (FkSynchronizedStorageTest.N_THREADS / 2), TimeUnit.SECONDS
+      (long) (SynchronizedTest.N_THREADS / 2), TimeUnit.SECONDS
     );
     if (failed) {
       throw new TimeoutException("FkSynchronizedStorageTest#readsAndWritesConcurrently() failed");
@@ -58,7 +58,7 @@ final class FkSynchronizedStorageTest {
     MatcherAssert.assertThat(
       "Has size equal to stack size",
       storage.xml().nodes("/stack/item"),
-      Matchers.hasSize(FkSynchronizedStorageTest.N_THREADS)
+      Matchers.hasSize(SynchronizedTest.N_THREADS)
     );
   }
 }

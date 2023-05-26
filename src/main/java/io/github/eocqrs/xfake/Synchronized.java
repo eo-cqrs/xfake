@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
  * @author l3r8yJ
  */
 @RequiredArgsConstructor
-public final class FkSynchronizedStorage implements FkStorage {
+public final class Synchronized implements FkStorage {
 
   /**
    * Lock.
