@@ -37,7 +37,6 @@ public final class FkSynchronizedStorage implements FkStorage {
     } finally {
       this.rwl.readLock().unlock();
     }
-
   }
 
   @Override
