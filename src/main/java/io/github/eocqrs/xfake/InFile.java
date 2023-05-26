@@ -32,6 +32,11 @@ import org.xembly.Xembler;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+/*
+ * @todo #22:45m/DEV Test Thread safety
+ * We need to introduce tests for Thread safety
+ */
 
 /**
  * Storage in file.
@@ -50,6 +55,12 @@ public final class InFile implements FkStorage {
    */
   private final transient ImmutableReentrantLock lock =
     new ImmutableReentrantLock();
+
+  /**
+   * Read-Write Lock.
+   */
+  private final transient ReentrantReadWriteLock rw =
+    new ReentrantReadWriteLock();
 
   /**
    * Ctor.
@@ -83,7 +94,8 @@ public final class InFile implements FkStorage {
 
   @Override
   public XML xml() throws Exception {
-    synchronized (this.name) {
+    this.rw.readLock().lock();
+    try {
       return new XMLDocument(
         new TextOf(
           new File(
@@ -91,12 +103,15 @@ public final class InFile implements FkStorage {
           )
         ).asString()
       );
+    } finally {
+      this.rw.readLock().unlock();
     }
   }
 
   @Override
   public void apply(final Iterable<Directive> dirs) throws Exception {
-    synchronized (this.name) {
+    this.rw.writeLock().lock();
+    try {
       new LengthOf(
         new TeeInput(
           new XMLDocument(
@@ -110,6 +125,8 @@ public final class InFile implements FkStorage {
           StandardCharsets.UTF_8
         )
       ).value();
+    } finally {
+      this.rw.writeLock().unlock();
     }
   }
 
