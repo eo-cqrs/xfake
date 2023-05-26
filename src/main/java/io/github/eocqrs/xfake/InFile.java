@@ -22,17 +22,17 @@
 
 package io.github.eocqrs.xfake;
 
-import com.jcabi.xml.XML;
-import com.jcabi.xml.XMLDocument;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+
 import org.cactoos.io.TeeInput;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.TextOf;
 import org.xembly.Directive;
 import org.xembly.Xembler;
 
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import com.jcabi.xml.XML;
+import com.jcabi.xml.XMLDocument;
 /*
  * @todo #22:45m/DEV Test Thread safety
  * We need to introduce tests for Thread safety
@@ -45,32 +45,20 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @since 0.0.0
  */
 public final class InFile implements FkStorage {
-
   /**
    * File name.
    */
   private final transient String name;
-  /**
-   * Lock.
-   */
-  private final transient ImmutableReentrantLock lock =
-    new ImmutableReentrantLock();
-
-  /**
-   * Read-Write Lock.
-   */
-  private final transient ReentrantReadWriteLock rw =
-    new ReentrantReadWriteLock();
 
   /**
    * Ctor.
    *
-   * @param nm   File name to create
+   * @param name File name to create
    * @param root root XML node
    * @throws Exception When something went wrong.
    */
-  public InFile(final String nm, final String root) throws Exception {
-    this(File.createTempFile(nm, ".xml"), root);
+  public InFile(final String name, final String root) throws Exception {
+    this(File.createTempFile(name, ".xml"), root);
     new File(this.name).deleteOnExit();
   }
 
@@ -94,49 +82,29 @@ public final class InFile implements FkStorage {
 
   @Override
   public XML xml() throws Exception {
-    this.rw.readLock().lock();
-    try {
-      return new XMLDocument(
-        new TextOf(
-          new File(
-            this.name
-          )
-        ).asString()
-      );
-    } finally {
-      this.rw.readLock().unlock();
-    }
+    return new XMLDocument(
+      new TextOf(
+        new File(
+          this.name
+        )
+      ).asString()
+    );
   }
 
   @Override
   public void apply(final Iterable<Directive> dirs) throws Exception {
-    this.rw.writeLock().lock();
-    try {
-      new LengthOf(
-        new TeeInput(
-          new XMLDocument(
-            new Xembler(
-              dirs
-            ).applyQuietly(this.xml().node())
-          ).toString(),
-          new File(
-            this.name
-          ),
-          StandardCharsets.UTF_8
-        )
-      ).value();
-    } finally {
-      this.rw.writeLock().unlock();
-    }
-  }
-
-  @Override
-  public void lock() {
-    this.lock.lock();
-  }
-
-  @Override
-  public void unlock() {
-    this.lock.unlock();
+    new LengthOf(
+      new TeeInput(
+        new XMLDocument(
+          new Xembler(
+            dirs
+          ).applyQuietly(this.xml().node())
+        ).toString(),
+        new File(
+          this.name
+        ),
+        StandardCharsets.UTF_8
+      )
+    ).value();
   }
 }
