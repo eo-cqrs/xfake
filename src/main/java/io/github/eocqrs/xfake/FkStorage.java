@@ -48,29 +48,4 @@ public interface FkStorage {
    * @throws Exception When something went wrong.
    */
   void apply(Iterable<Directive> dirs) throws Exception;
-
-  /**
-   * Locks storage to the current thread.
-   *
-   * <p>If the lock is available, grant it
-   * to the calling thread and block all operations from other threads.
-   * If not available, wait for the holder of the lock to release it with
-   * {@link #unlock()} before any other operations can be performed.
-   *
-   * <p>Locking behavior is reentrant, which means a thread can invoke
-   * multiple times, where a hold count is maintained.
-   */
-  void lock();
-
-  /**
-   * Unlock storage.
-   *
-   * <p>Locking behavior is reentrant, thus if the thread invoked
-   * {@link #lock()} multiple times, the hold count is decremented. If the
-   * hold count reaches 0, the lock is released.
-   *
-   * <p>If the current thread does not hold the lock, an
-   * {@link IllegalMonitorStateException} will be thrown.
-   */
-  void unlock();
 }
