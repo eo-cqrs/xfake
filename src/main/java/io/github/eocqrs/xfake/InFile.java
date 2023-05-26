@@ -32,6 +32,7 @@ import org.xembly.Xembler;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Storage in file.
@@ -50,6 +51,12 @@ public final class InFile implements FkStorage {
    */
   private final transient ImmutableReentrantLock lock =
     new ImmutableReentrantLock();
+
+  /**
+   * Read-Write Lock.
+   */
+  private final transient ReentrantReadWriteLock rw =
+    new ReentrantReadWriteLock();
 
   /**
    * Ctor.
@@ -83,7 +90,8 @@ public final class InFile implements FkStorage {
 
   @Override
   public XML xml() throws Exception {
-    synchronized (this.name) {
+    this.rw.readLock().lock();
+    try {
       return new XMLDocument(
         new TextOf(
           new File(
@@ -91,6 +99,8 @@ public final class InFile implements FkStorage {
           )
         ).asString()
       );
+    } finally {
+      this.rw.readLock().unlock();
     }
   }
 
