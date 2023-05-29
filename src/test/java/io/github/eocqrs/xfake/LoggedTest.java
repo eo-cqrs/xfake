@@ -13,7 +13,7 @@ import java.util.logging.Level;
  * Test case for {@link Logged}.
  *
  * @author Aliaksei Bialiauski (abialiauski.dev@gmail.com)
- * @since 0.0.2
+ * @since 0.1.2
  */
 final class LoggedTest {
 

@@ -78,6 +78,29 @@ The result of the applying will be:
 </fake>
 ```
 
+### Synchronized Storage
+Also, you can create a synchronized storage:
+```java
+final FkStorage storage = 
+  new Synchronized(
+    new InFile("fake-synchronized", "<fake/>")
+);
+```
+
+In this case reads `xml()` and writes `apply(dirs)` will be synchronized,
+and it will be possible to use it in multithreading environment.
+
+### Logging Storage
+```java
+final FkStorage storage =
+  new Logged(
+    new Synchronized(
+      new InFile("logged-test", "<fake/>")
+    ),
+  Level.INFO
+);
+```
+
 This is the use-case of FkStorage in [**eo-kafka**](https://github.com/eo-cqrs/eo-kafka/blob/master/src/main/java/io/github/eocqrs/kafka/fake/InXml.java).
 ## How to Contribute
 
