@@ -27,6 +27,7 @@ public final class Logged implements FkStorage {
    * Ctor.
    *
    * @param orgn Storage
+   * @param lvl  Logging level
    */
   public Logged(final FkStorage orgn, final Level lvl) {
     this.origin = orgn;
