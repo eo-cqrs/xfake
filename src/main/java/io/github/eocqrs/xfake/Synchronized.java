@@ -1,20 +1,18 @@
 package io.github.eocqrs.xfake;
 
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
-
+import com.jcabi.xml.XML;
+import lombok.RequiredArgsConstructor;
 import org.xembly.Directive;
 
-import com.jcabi.xml.XML;
-
-import lombok.RequiredArgsConstructor;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * This is synchronized decorator for {@link FkStorage}.
  * <b>This class is thread-safe.</b>
  *
- * @since 0.0.2
  * @author l3r8yJ
+ * @since 0.0.2
  */
 @RequiredArgsConstructor
 public final class Synchronized implements FkStorage {
