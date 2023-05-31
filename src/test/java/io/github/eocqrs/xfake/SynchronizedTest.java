@@ -1,5 +1,10 @@
 package io.github.eocqrs.xfake;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.Test;
+import org.xembly.Directives;
+
 import java.util.Stack;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -8,16 +13,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.stream.IntStream;
 
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-import org.xembly.Directives;
-
 /**
  * Test case for {@link Synchronized}.
  *
- * @since 0.0.2
  * @author l3r8yJ
+ * @since 0.0.2
  */
 final class SynchronizedTest {
 
