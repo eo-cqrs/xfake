@@ -22,17 +22,16 @@
 
 package io.github.eocqrs.xfake;
 
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-
+import com.jcabi.xml.XML;
+import com.jcabi.xml.XMLDocument;
 import org.cactoos.io.TeeInput;
 import org.cactoos.scalar.LengthOf;
 import org.cactoos.text.TextOf;
 import org.xembly.Directive;
 import org.xembly.Xembler;
 
-import com.jcabi.xml.XML;
-import com.jcabi.xml.XMLDocument;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Storage in file.
