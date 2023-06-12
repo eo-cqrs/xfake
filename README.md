@@ -60,6 +60,8 @@ The output of `storage.xml()` will be:
 <fake/>
 ```
 
+After an object will be destroyed, the file will be **deleted**. 
+
 ### Applying Directives
 ```java
 final FkStorage storage = new InFile("fake-test", "<fake/>");
