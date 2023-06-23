@@ -39,6 +39,7 @@ import java.util.logging.Level;
  */
 final class LoggedTest {
 
+  @SuppressWarnings("JTCOP.RuleAssertionMessage")
   @Test
   void writesXmlLog() throws Exception {
     final Level lvl = Level.INFO;
