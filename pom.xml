@@ -83,7 +83,7 @@ SOFTWARE.
     <xembly.version>0.28.1</xembly.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     <maven-verifier-plugin.version>1.1</maven-verifier-plugin.version>
-    <jtcop.version>0.1.16</jtcop.version>
+    <jtcop.version>0.1.17</jtcop.version>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
     <checkstyle.version>10.12.1</checkstyle.version>
     <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
