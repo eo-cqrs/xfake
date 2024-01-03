@@ -85,7 +85,7 @@ SOFTWARE.
     <maven-verifier-plugin.version>1.1</maven-verifier-plugin.version>
     <jtcop.version>1.1.1</jtcop.version>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-    <checkstyle.version>10.12.3</checkstyle.version>
+    <checkstyle.version>10.12.7</checkstyle.version>
     <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
     <sa-tan.version>0.1.5</sa-tan.version>
     <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
